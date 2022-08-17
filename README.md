@@ -1,5 +1,15 @@
-# Build Instructions
+# Build & Run Instructions
+To verify process is running, a success message should be seen at [localhost:8002](localhost:8002)
+
+## Rust Dev Build & Run
 Pretty simple, just `cargo run`.
+
+## Rust Release Build & Run
+This one's a little tricker, it's `cargo run --release`
+
+## Docker Build & Run
+Build the image: `docker build -t service-tipinenrichment .`
+Run the image: `docker run -p 8002:8002 --name service-tie service-tipinenrichment
 
 # Progress
 
