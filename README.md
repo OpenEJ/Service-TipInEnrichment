@@ -5,11 +5,12 @@ To verify the service is running after completing one of the following methods, 
 Pretty simple, just `cargo run`.
 
 ## Method 2: Release Build & Run
-This one's a little tricker, it's `cargo run --release`
+This one's a little tricker, it's `cargo run --release`.
 
 ## Method 3: Docker Build & Run
-Build the image: `docker build -t service-tipinenrichment .`
-Run the image: `docker run -p 8002:8002 --name service-tie service-tipinenrichment`
+Build the image: `docker build -t service-tipinenrichment .`.
+
+Run the image: `docker run -p 8002:8002 --name service-tie service-tipinenrichment`.
 
 # Progress
 
