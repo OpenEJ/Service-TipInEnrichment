@@ -1,5 +1,5 @@
 # Build & Run Instructions
-To verify the service is running after completing one of the following methods, a success message will be visible at [localhost:8002](http://localhost:8002/).
+To verify the service is running after completing one of the following methods, run `curl http://localhost:8002/` or go to [http://localhost:8002/](http://localhost:8002/) in the browser. If the service is live, you'll be greeted with a success message.
 
 ## Method 1: Dev Build & Run
 Pretty simple, just `cargo run`.
