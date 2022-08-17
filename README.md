@@ -1,5 +1,16 @@
-# Build Instructions
+# Build & Run Instructions
+To verify the service is running after completing one of the following methods, run `curl http://localhost:8002/` or go to [http://localhost:8002/](http://localhost:8002/) in the browser. If the service is live, you'll be greeted with a success message.
+
+## Method 1: Dev Build & Run
 Pretty simple, just `cargo run`.
+
+## Method 2: Release Build & Run
+This one's a little tricker, it's `cargo run --release`.
+
+## Method 3: Docker Build & Run
+Build the image: `docker build -t service-tipinenrichment .`.
+
+Run the image: `docker run -p 8002:8002 --name service-tie service-tipinenrichment`.
 
 # Progress
 
