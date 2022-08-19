@@ -2,15 +2,17 @@ use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
 pub struct Log {
-    throttle_position: f64,
-    throttle_angle_change: f64,
-    af_correction_short: f64,
-    af_correction_learning: f64
+    engine_speed: u64,
+    cl_ol_status: u8,
+    throttle: f64,
+    boost_error: f64,
+    wideband_afr: f64,
+    tip_in_throttle: f64,
 }
 
 impl std::fmt::Display for Log {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        format!("TP: {}, TAC: {}, AF_SH: {}, AF_LR: {}", self.throttle_position, self.throttle_angle_change, self.af_correction_short, self.af_correction_learning).fmt(f)
+        format!("RPM: {}, CL/OL: {}, Throttle %: {}, Boost Error: {}, Wideband AFR: {}, Tip-In-Throttle: {}", self.engine_speed, self.cl_ol_status, self.throttle, self.boost_error, self.wideband_afr, self.tip_in_throttle).fmt(f)
     }
 }
 
