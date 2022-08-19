@@ -1,13 +1,13 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Deserialize, Debug)]
 pub struct Log {
-    engine_speed: u64,
-    cl_ol_status: u8,
-    throttle: f64,
-    boost_error: f64,
-    wideband_afr: f64,
-    tip_in_throttle: f64,
+    pub engine_speed: u64,
+    pub cl_ol_status: u8,
+    pub throttle: f64,
+    pub boost_error: f64,
+    pub wideband_afr: f64,
+    pub tip_in_throttle: f64,
 }
 
 impl std::fmt::Display for Log {
@@ -16,10 +16,11 @@ impl std::fmt::Display for Log {
     }
 }
 
+#[derive(Serialize)]
 pub struct Correction {
-    throttle_angle_change: f64,
-    correction: f64,
-    frequency: u64
+    pub throttle_angle_change: f64,
+    pub correction: f64,
+    pub frequency: u64
 }
 
 impl Correction {

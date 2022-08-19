@@ -1,5 +1,6 @@
 use actix_cors::Cors; 
 use actix_web::{error, web, App, HttpResponse, HttpServer, Responder};
+use serde_json::Result;
 
 mod models;
 mod tip_in_enrichment;
@@ -8,9 +9,9 @@ async fn index() -> impl Responder {
     HttpResponse::Ok().body("tip-in-enrichment actix-web server is live!")
 }
 
-async fn receive_data(info: web::Json<Vec<models::Log>>) -> impl Responder {
-    let resp = tip_in_enrichment::begin(info.into_inner());
-    HttpResponse::Ok().body(resp)
+async fn receive_data(info: web::Json<Vec<models::Log>>) -> Result<impl Responder> {
+    let obj_resp = tip_in_enrichment::begin(info.into_inner());
+    return serde_json::to_string(&obj_resp);
 }
 
 #[actix_web::main]
