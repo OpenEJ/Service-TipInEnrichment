@@ -2,9 +2,13 @@ use crate::models::Log;
 use crate::models::Correction;
 
 pub fn begin(data: Vec<Log>) -> Vec<Correction>{
+    println!("Beginning Calcs. Data Length: {}", data.len());
     let without_open_loop = remove_open_loop(data);
+    println!("Removed Open Loop Data. Data Length: {}", without_open_loop.len());
     let without_high_boost_error = remove_high_boost_error(without_open_loop);
+    println!("Removed High Boost Error Data. Data Length: {}", without_high_boost_error.len());
     let correction_tables = build_correction_table(without_high_boost_error);
+    println!("Build Correction Tables");
     correction_tables
 }
 
@@ -12,6 +16,9 @@ fn remove_open_loop(mut data: Vec<Log>) -> Vec<Log> {
     for i in 0..data.len() {
         if data[i].cl_ol_status == 10 {
             data.remove(i);
+        }
+        if i + 1 >= data.len() {
+            break;
         }
     }
     data
@@ -21,6 +28,9 @@ fn remove_high_boost_error(mut data: Vec<Log>) -> Vec<Log> {
     for i in 0..data.len() {
         if data[i].boost_error > 8.0 {
             data.remove(i);
+        }
+        if i + 1 >= data.len() {
+            break;
         }
     }
     data

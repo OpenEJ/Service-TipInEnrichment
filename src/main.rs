@@ -22,7 +22,7 @@ async fn main() -> std::io::Result<()> {
               .allow_any_header()
               .allow_any_method();
         let json_config = web::JsonConfig::default()
-            .limit(4096)
+            //.limit(4096)
             .error_handler(|err, _req| {
                 // create custom error response
                 error::InternalError::from_response(err, HttpResponse::Conflict().finish())
