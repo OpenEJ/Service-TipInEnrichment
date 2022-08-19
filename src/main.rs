@@ -1,3 +1,4 @@
+use actix_cors::Cors; 
 use actix_web::{error, web, App, HttpResponse, HttpServer, Responder};
 
 mod models;
@@ -7,13 +8,18 @@ async fn index() -> impl Responder {
     HttpResponse::Ok().body("tip-in-enrichment actix-web server is live!")
 }
 
-async fn receive_data(info: web::Json<Vec<models::Log>>) -> String {
-    tip_in_enrichment::begin(info.into_inner())
+async fn receive_data(info: web::Json<Vec<models::Log>>) -> impl Responder {
+    let resp = tip_in_enrichment::begin(info.into_inner());
+    HttpResponse::Ok().body(resp)
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
+        let cors = Cors::default()
+              .allow_any_origin()
+              .allow_any_header()
+              .allow_any_method();
         let json_config = web::JsonConfig::default()
             .limit(4096)
             .error_handler(|err, _req| {
@@ -22,8 +28,9 @@ async fn main() -> std::io::Result<()> {
                     .into()
             });
         App::new()
+            .wrap(cors)
             .service(
-                web::resource("/api/analyze/2")
+                web::resource("/api/analyze/2/")
                     .app_data(json_config)
                     .route(web::post().to(receive_data)),
             ).service(
@@ -35,3 +42,4 @@ async fn main() -> std::io::Result<()> {
     .run()
     .await
 }
+
